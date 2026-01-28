@@ -80,8 +80,8 @@ class CouponDispenser:
             elif user_input == "show":
                 for i in range(len(self.customer_roster)):
                     name = self.customer_roster[i]
-                    coupon = self.self.issued_indices[i]
-                    print(f"{name}:{coupon}")
+                    coupon = self.coupon_cards[self.issued_indices[i]]
+                    print(f"{name}: {coupon}")
 
             else:
                 my_list = user_input.split(",")
@@ -90,7 +90,7 @@ class CouponDispenser:
                     if stripped_text == "":
                         continue 
                     else:
-                        self.issue_coupon(stripped_text)
+                        print(self.issue_coupon(stripped_text))
 
 
 
