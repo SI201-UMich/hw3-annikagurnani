@@ -42,7 +42,7 @@ class CouponDispenser:
         elif name in self.customer_roster:
             idx = self.customer_roster.index(name)
             coupon_idx = self.issued_indices[idx]
-            return f"That name already has a coupon: {coupon_idx}"
+            return f"That name already has a coupon: {self.coupon_cards[coupon_idx]}"
 
         else:
             rand_index = random.randrange(len(self.coupon_cards))
@@ -53,25 +53,9 @@ class CouponDispenser:
 
 
     def distribute_session(self):
-        """
-        Run the "coupon dispenser" session.
-
-        The program will loop asking you to enter a customer name (or names), show, or exit.  
-        - If you type exit (exact spelling) the program will print "Goodbye!" and stop.  
-        - If you enter one or more customer names (separated by commas).
-           * A coupon will be picked at random from a list of coupons for each name 
-           if that name doesn't already have an assigned coupon. 
-        - If you type show (exact spelling) it will display a string with each customer's name and coupon.
-
-        See the instructions for more details.
-
-        Reminder: Use lists only (no dictionaries).
-        """
-        
         round_number = 1
         while True:
             user_input = input(f"Round {round_number} - Enter a name (or a comma-separated list), or type 'show' or 'exit': ")
-            round_number += 1
 
             if user_input == "exit":
                 print("Goodbye!")
@@ -91,8 +75,7 @@ class CouponDispenser:
                         continue 
                     else:
                         print(self.issue_coupon(stripped_text))
-
-
+        round_number += 1
 
     def tally_distribution(self):
         """
@@ -109,8 +92,19 @@ class CouponDispenser:
         Returns:
             None
         """
-        # TODO: Implement per instructions
-        pass
+        if self.issued_indices == []:
+            print("Empty")
+            return 
+        else:
+            for i in range(len(self.coupon_cards)):
+                count = 0
+                for j in range(len(self.issued_indices)):
+                    if i == self.issued_indices[j]:
+                        count += 1 
+                print(f"{self.coupon_cards[i]} distribution count: {count}")
+        return 
+
+
 
 
 def main():
@@ -129,10 +123,10 @@ def main():
     ]
 
     # Uncomment the lines below as you implement each function.
-    # box = CouponDispenser(coupon_cards)
-    # box.distribute_session()
-    # box.tally_distribution()
-    pass
+    box = CouponDispenser(coupon_cards)
+    box.distribute_session()
+    #box.tally_distribution()
+    
 
 
 # -----------------------
