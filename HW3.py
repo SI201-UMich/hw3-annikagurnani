@@ -14,16 +14,6 @@ from contextlib import redirect_stdout
 
 
 class CouponDispenser:
-    """
-    CouponDispenser manages a box of coupon cards and assigns one coupon
-    to each unique name entered by the user during a session.
-
-    Required attributes (initialized in __init__):
-      - coupon_cards: list[str]              # all possible coupon texts
-      - customer_roster: list[str]             # names in order of assignment
-      - issued_indices: list[int]           # indices into coupon_cards aligned to customer_roster
-
-    """
 
     def __init__(self, coupon_cards):
         self.coupon_cards = coupon_cards
@@ -75,23 +65,9 @@ class CouponDispenser:
                         continue 
                     else:
                         print(self.issue_coupon(stripped_text))
-        round_number += 1
+            round_number += 1
 
     def tally_distribution(self):
-        """
-        Extra credit:
-        Print coupon distribution counts (NO sorting) using ONLY lists.
-
-          - If issued_indices is empty:
-              * print("Empty")
-              * return
-          - Otherwise:
-              * For each coupon in coupon_cards (in original order), print:
-                    "<coupon> distribution count: <count>."
-
-        Returns:
-            None
-        """
         if self.issued_indices == []:
             print("Empty")
             return 
@@ -101,20 +77,13 @@ class CouponDispenser:
                 for j in range(len(self.issued_indices)):
                     if i == self.issued_indices[j]:
                         count += 1 
-                print(f"{self.coupon_cards[i]} distribution count: {count}")
+                print(f"{self.coupon_cards[i]} distribution count: {count}.")
         return 
 
 
 
 
 def main():
-    """
-    Driver function:
-      - Define the coupon_cards list (example coupons below)
-      - Create a CouponDispenser
-      - Start the interaction via distribute_session()
-      - After exit, call tally_distribution() to print the distribution in the terminal
-    """
     coupon_cards = [
         "10% off",
         "Free small coffee",
@@ -125,7 +94,7 @@ def main():
     # Uncomment the lines below as you implement each function.
     box = CouponDispenser(coupon_cards)
     box.distribute_session()
-    #box.tally_distribution()
+    box.tally_distribution()
     
 
 
